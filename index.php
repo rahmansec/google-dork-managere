@@ -13,6 +13,7 @@ $categories = $db->query("SELECT DISTINCT category FROM dorks")->fetchAll(PDO::F
     <title>Google Dork Search Tool</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
 </head>
 <body>
     <div class="container">
@@ -31,29 +32,46 @@ $categories = $db->query("SELECT DISTINCT category FROM dorks")->fetchAll(PDO::F
                     <?php endforeach; ?>
                 </select>
             </div>
-
-
-            
             <div class="col-md-6">
                 <input type="text" id="searchInput" class="form-control" placeholder="Search dorks">
             </div>
         </div>
+        <div class="text-center mb-3">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDorkModal">
+             Add New Dork
+            <i class="bi bi-plus-circle ms-1"></i>
+            </button>
+        </div>
 
         <hr>
-        <h5>➕ Add New Dork</h5>
-        <form id="addDorkForm">
-            <div class="mb-2">
-                <input type="text" name="category" class="form-control" placeholder="Category">
+
+        <!-- Modal -->
+        <div class="modal fade" id="addDorkModal" tabindex="-1" aria-labelledby="addDorkModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="addDorkModalLabel">Add New Dork</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="addDorkForm">
+                    <div class="mb-2">
+                    <input type="text" name="category" class="form-control" placeholder="Category">
+                    </div>
+                    <div class="mb-2">
+                    <input type="text" name="dork" class="form-control" placeholder="Dork">
+                    </div>
+                    <div class="mb-2">
+                    <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Add</button>
+                </form>
+                </div>
             </div>
-            <div class="mb-2">
-                <input type="text" name="dork" class="form-control" placeholder="Dork">
             </div>
-            <button type="submit" class="btn btn-success w-100">Add</button>
-        </form>
+        </div>
 
         <ul id="dorkList" class="list-group"></ul>
-
-  
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

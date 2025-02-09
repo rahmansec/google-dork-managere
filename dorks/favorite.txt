@@ -1,111 +1,81 @@
-inurl:".env"
-inurl:"config.env"
-inurl:"/config/.env"
-inurl:"database.env"
-inurl:".json"
-inurl:"config.json"
-inurl:"database.json"
-inurl:".yaml"
-inurl:"config.yaml"
-inurl:"app.yaml"
-inurl:".xml"
-inurl:"config.xml"
-inurl:"db_config.xml"
-inurl:"/settings/config.xml"
-inurl:".bak"
-inurl:"backup.bak"
-inurl:"/backups/"
-inurl:"/db_backups/"
-inurl:".old"
-inurl:"config.old"
-inurl:".backup"
-inurl:"backup.config"
-inurl:"/old_backups/"
-inurl:"/archive/"
-inurl:"/wp-content/backups/"
-inurl:".sql"
-inurl:"dump.sql"
-inurl:"database.sql"
-inurl:"db_backup.sql"
-inurl:".db"
-inurl:"database.db"
-inurl:"/databases/"
-inurl:"/db/backups/"
-inurl:".log"
-inurl:"error.log"
-inurl:"access.log"
-inurl:"/logs/"
-inurl:"/var/log/"
-inurl:"/log/"
-inurl:"system.log"
-inurl:"debug.log"
-inurl:"server.log"
-inurl:"/logfiles/"
-inurl:".htaccess"
-inurl:".htpasswd"
-inurl:"/etc/passwd"
-inurl:"/etc/shadow"
-inurl:"/var/www/.htaccess"
-inurl:"/var/www/.htpasswd"
-inurl:"/etc/apache2/.htpasswd"
-inurl:"/usr/local/apache/.htpasswd"
-inurl:"api_key"
-inurl:"apikey"
-inurl:"/keys/"
-inurl:"/config/keys/"
-inurl:"/config/api_keys.json"
-inurl:"/api_config/secret.json"
-inurl:"/config/.env"
-inurl:"client_secret.json"
-inurl:".php"
-inurl:"config.php"
-inurl:"db_config.php"
-inurl:"index.php"
-inurl:"/admin/config.php"
-inurl:"/include/db.php"
-inurl:"/admin.php"
-inurl:"/uploads/.php"
-inurl:"/uploads/"
-inurl:".zip"
-inurl:".tar.gz"
-inurl:".rar"
-inurl:".tar"
-inurl:".7z"
-inurl:".gzip"
-inurl:"/backup/"
-inurl:"/archives/"
-inurl:"/dump/"
-inurl:".js"
-inurl:"main.js"
-inurl:"/scripts/"
-inurl:".jsx"
-inurl:"/uploads/"
-inurl:"/userfiles/"
-inurl:"/temp/"
-inurl:"/formdata/"
-inurl:"/user_data/"
-inurl:"/wp-content/uploads/"
-inurl:"/uploads/images/"
-inurl:"wp-config.php"
-inurl:"wp-login.php"
-inurl:"/wp-admin/"
-inurl:"/wp-content/plugins/"
-inurl:"/wp-content/themes/"
-inurl:"/administrator/"
-inurl:"/administrator/components/"
-inurl:"/joomla/configuration.php"
-inurl:".pem"
-inurl:".crt"
-inurl:".key"
-inurl:"/ssl/"
-inurl:"/certs/"
-inurl:"/private_keys/"
-inurl:"/certificates/"
-inurl:"/ssl_certificates/"
-inurl:"social_security_number"
-inurl:"passwords.txt"
-inurl:"/private/"
-inurl:"/secret/"
-inurl:"/personal/"
-inurl:"/confidential/"
-inurl:"/user_data/"
+inurl:"/config/"  => Looking for configuration pages that may expose sensitive information.
+
+inurl:/.git/  => Looking for Git directories that may contain source code information.
+
+ext:php inurl:?  => Searching for PHP pages with query parameters that can be checked for SQL injection or XSS.
+
+inurl:admin.php  => Finding admin login pages that may be accessible.
+
+filetype:conf inurl:secret  => Searching for configuration files that may contain confidential information.
+
+inurl:/phpinfo.php  => Finding `phpinfo.php` pages that can provide important information about server configuration.
+
+inurl:/.svn/  => Searching for Subversion directories that may contain sensitive data.
+
+ext:db inurl:database  => Finding database files that may contain important information.
+
+inurl:/admin/panel  => Searching for admin panels that may be accessible without authentication.
+
+inurl:/admin/config.php  => Searching for admin configuration files that may contain sensitive information.
+
+inurl:/test.php  => Finding test files that may expose system information.
+
+inurl:/admin/.git/  => Git directories in admin path that may expose code information.
+
+ext:xls inurl:passwords  => Searching for Excel files that contain login or password information.
+
+inurl:/dev/ inurl:debug  => Finding development and debug directories that may display important information.
+
+index:"Index of /"  => Finding indexed directories that may contain important files.
+
+ext:sql inurl:database_backup  => Searching for database backups that may contain user information or sensitive data.
+
+ext:js inurl:"/wp-content/"  => Searching for JavaScript files in WordPress that may contain API information or sensitive tokens.
+
+ext:sql | ext:dbf | ext:mdb  => Finding various database files that may be accessible.
+
+inurl:api | site:*/rest | site:*/v1 | site:*/v2 | site:*/v3  => Searching for public APIs and their versions.
+
+ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:sh | ext:bak | ext:backup | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:json  => Finding various configuration, log, backup, and authentication files.
+
+inurl:conf | inurl:env | inurl:cgi | inurl:bin | inurl:etc | inurl:root | inurl:sql | inurl:backup | inurl:admin | inurl:php  => Searching for sensitive server paths that may contain important information.
+
+inurl:"error" | intitle:"exception" | intitle:"failure" | intitle:"server at" | inurl:exception | "database error" | "SQL syntax" | "undefined index" | "unhandled exception" | "stack trace"  => Searching for website errors that can provide important information about the server or database.
+
+inurl:q= | inurl:s= | inurl:search= | inurl:query= | inurl:keyword= | inurl:lang= inurl:&  => Searching for internal search pages of websites that may be vulnerable to XSS or LFI attacks.
+
+inurl:url= | inurl:return= | inurl:next= | inurl:redirect= | inurl:redir= | inurl:ret= | inurl:r2= | inurl:page= inurl:& inurl:http  => Finding redirect parameters that can be checked for phishing or open redirect attacks.
+
+inurl:id= | inurl:pid= | inurl:category= | inurl:cat= | inurl:action= | inurl:sid= | inurl:dir= inurl:&  => Finding URL parameters that may be vulnerable to SQL injection or XSS attacks.
+
+inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain=  | inurl:page= inurl:&  => Searching for URLs that may contain important information.
+
+inurl:include | inurl:dir | inurl:detail= | inurl:file= | inurl:folder= | inurl:inc= | inurl:locate= | inurl:doc= | inurl:conf= inurl:&  => Finding parameters that may be vulnerable to LFI and RFI attacks.
+
+inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | inurl:read=  | inurl:ping=  => Searching for executable pages that may allow remote command execution.
+
+inurl:apidocs | inurl:api-docs | inurl:swagger | inurl:api-explorer  => Finding API documentation that may contain API keys or other sensitive information.
+
+inurl:login | inurl:signin | intitle:login | intitle:signin | inurl:secure  => Searching for login pages that may be accessible.
+
+ext:pdf | ext:xml | ext:xls | ext:xlsx | ext:ppt | ext:pptx | ext:doc | ext:docx  => Searching for various documents that may contain sensitive information.
+
+intext:"confidential" | intext:"Not for Public Release" | intext:"internal use only" | intext:"do not distribute"  => Searching for texts indicating confidential documents.
+
+inurl:email= | inurl:phone= | inurl:password= | inurl:secret= inurl:&  => Finding pages containing email, phone number, or password.
+
+ext:pdf intext:"confidential"  => Finding PDF files containing confidential information.
+
+("INTERNAL USE ONLY" | "PRIVATE AND CONFIDENTIAL" | "ONLY FOR" | "HIGHLY CONFIDENTIAL" | "CONFIDENTIAL" | "STRICTLY CONFIDENTIAL" | "SENSITIVE" | "COMPANY SENSITIVE" | "PRIVATE ASSET")  => Searching for documents containing confidential keywords.
+
+ext:pdf "CONFIDENTIAL"  => Searching for PDF files marked as confidential.
+
+ext:pdf "STRICTLY CONFIDENTIAL"  => Searching for highly confidential documents in PDF format.
+
+ext:pdf "HIGHLY CONFIDENTIAL"  => Searching for highly sensitive and confidential documents in PDF format.
+
+ext:pdf "PRIVATE"  => Finding private documents.
+
+ext:pdf "PRIVATE AND CONFIDENTIAL"  => Private and confidential documents.
+
+ext:pdf "PRIVATE AND SENSITIVE"  => Sensitive and private documents.

@@ -1,13 +1,12 @@
 <?php
 require 'db.php';
-
 $category = $_GET['category'] ?? '';
 
 if (!empty($category)) {
-    $stmt = $db->prepare("SELECT category, dork FROM dorks WHERE category = ?");
+    $stmt = $db->prepare("SELECT * FROM dorks WHERE category = ?");
     $stmt->execute([$category]);
 } else {
-    $stmt = $db->query("SELECT category, dork FROM dorks");
+    $stmt = $db->query("SELECT * FROM dorks");
 }
 
 $dorks = $stmt->fetchAll(PDO::FETCH_ASSOC);
