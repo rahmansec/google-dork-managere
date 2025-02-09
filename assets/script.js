@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     };
 
                     const descriptionButton = document.createElement('button');
-                    descriptionButton.textContent = 'showAlertModal';
+                    descriptionButton.textContent = 'Description';
                     descriptionButton.className = 'btn btn-info btn-sm';
                     descriptionButton.style.marginLeft = '10px';
                     descriptionButton.onclick = (e) => {
@@ -87,62 +87,62 @@ document.addEventListener('DOMContentLoaded', function () {
                         showDescriptionModal(dork.description, dork.id);
                     };
 
-                    const editButton = document.createElement('button');
-                    editButton.textContent = 'Edit';
-                    editButton.className = 'btn btn-warning btn-sm';
-                    editButton.style.marginLeft = '10px';
-                    editButton.onclick = (e) => {
-                        e.stopPropagation();
-                        showEditModal(dork);
-                    };
+                    // const editButton = document.createElement('button');
+                    // editButton.textContent = 'Edit';
+                    // editButton.className = 'btn btn-warning btn-sm';
+                    // editButton.style.marginLeft = '10px';
+                    // editButton.onclick = (e) => {
+                    //     e.stopPropagation();
+                    //     showEditModal(dork);
+                    // };
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.className = 'btn btn-danger btn-sm';
-                    deleteButton.style.marginLeft = '10px';
-                    deleteButton.onclick = (e) => {
-                        e.stopPropagation();
-                        if (confirm('Are you sure you want to delete this dork?')) {
-                            fetch('php/manage_dork.php', {
-                                method: 'DELETE',
-                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                                body: `id=${dork.id}`
-                            })
-                                .then(response => response.json())
-                                .then(data => {
-                                    showAlertModal(data.message);
-                                    function showAlertModal(message) {
-                                        const modalHTML = `
-                                            <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="alertModalLabel">Alert</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ${message}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        `;
-                                        document.body.insertAdjacentHTML('beforeend', modalHTML);
-                                        const modal = new bootstrap.Modal(document.getElementById('alertModal'));
-                                        modal.show();
-                                    }
-                                    if (data.success) li.remove();
-                                });
-                        }
-                    };
+                    // const deleteButton = document.createElement('button');
+                    // deleteButton.textContent = 'Delete';
+                    // deleteButton.className = 'btn btn-danger btn-sm';
+                    // deleteButton.style.marginLeft = '10px';
+                    // deleteButton.onclick = (e) => {
+                    //     e.stopPropagation();
+                    //     if (confirm('Are you sure you want to delete this dork?')) {
+                    //         fetch('php/manage_dork.php', {
+                    //             method: 'DELETE',
+                    //             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    //             body: `id=${dork.id}`
+                    //         })
+                    //             .then(response => response.json())
+                    //             .then(data => {
+                    //                 showAlertModal(data.message);
+                    //                 function showAlertModal(message) {
+                    //                     const modalHTML = `
+                    //                         <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                    //                             <div class="modal-dialog">
+                    //                                 <div class="modal-content">
+                    //                                     <div class="modal-header">
+                    //                                         <h5 class="modal-title" id="alertModalLabel">Alert</h5>
+                    //                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    //                                     </div>
+                    //                                     <div class="modal-body">
+                    //                                         ${message}
+                    //                                     </div>
+                    //                                     <div class="modal-footer">
+                    //                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    //                                     </div>
+                    //                                 </div>
+                    //                             </div>
+                    //                         </div>
+                    //                     `;
+                    //                     document.body.insertAdjacentHTML('beforeend', modalHTML);
+                    //                     const modal = new bootstrap.Modal(document.getElementById('alertModal'));
+                    //                     modal.show();
+                    //                 }
+                    //                 if (data.success) li.remove();
+                    //             });
+                    //     }
+                    // };
 
                     buttonContainer.appendChild(copyButton);
                     buttonContainer.appendChild(descriptionButton);
-                    buttonContainer.appendChild(editButton);
-                    buttonContainer.appendChild(deleteButton);
+                    // buttonContainer.appendChild(editButton);
+                    // buttonContainer.appendChild(deleteButton);
                     li.appendChild(buttonContainer);
                     dorkList.appendChild(li);
                 });
